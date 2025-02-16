@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pytrends.request import TrendReq
+import uvicorn
+import os
 
 app = FastAPI()
 
@@ -24,3 +26,9 @@ def get_trends(keyword: str):
     recommendation = "📈 Рекомендуем увеличить бюджет!" if trend_change > 0 else "📉 Возможно, стоит снизить расходы."
 
     return {"dates": trend_dates, "values": trend_values, "recommendation": recommendation}
+
+# Настройка порта для Railway или другого сервера
+port = int(os.getenv("PORT", 8000))  # Используем переменную окружения PORT, если она есть, иначе 8000
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=port)
