@@ -28,7 +28,7 @@ def get_trends(keyword: str):
     return {"dates": trend_dates, "values": trend_values, "recommendation": recommendation}
 
 # Настройка порта для Railway или другого сервера
-port = int(os.getenv("PORT", 8000))  # Используем переменную окружения PORT, если она есть, иначе 8000
+port = int(os.getenv("PORT", 8080))  # Используем переменную окружения PORT, если она есть, иначе 8000
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=port)
